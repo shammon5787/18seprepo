@@ -2,7 +2,7 @@ import React from 'react'
 import img from '../Food/2.avif'
 import { FiMinus, FiPlus } from "react-icons/fi";
 import { MdDelete } from "react-icons/md";
-import { removeCard } from '../Store/CardSlice';
+import { decrementItem, incrementItem, removeCard } from '../Store/CardSlice';
 import { useDispatch } from 'react-redux';
 
 const CardItem = ({id, name, price, image, qty}) => {
@@ -17,9 +17,9 @@ const CardItem = ({id, name, price, image, qty}) => {
                     <h1>$: {price}</h1>
                 </div>
                 <div className='flex gap-4 items-center absolute right-6 mt-7'>
-                    <FiMinus className='text-xl bg-gray-600 rounded-full hover:bg-white hover:text-black cursor-pointer transition-all duration-500' />
+                    <FiMinus onClick={()=>qty > 1 ? dispatch(decrementItem({id})) : qty = 1} className='text-xl bg-gray-600 rounded-full hover:bg-white hover:text-black cursor-pointer transition-all duration-500' />
                     <span>{qty}</span>
-                    <FiPlus className='text-xl bg-gray-600 rounded-full hover:bg-white hover:text-black cursor-pointer transition-all duration-500' />
+                    <FiPlus onClick={()=>dispatch(incrementItem({id}))} className='text-xl bg-gray-600 rounded-full hover:bg-white hover:text-black cursor-pointer transition-all duration-500' />
                 </div>
             </div>
         </div>
